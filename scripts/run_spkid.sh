@@ -150,6 +150,8 @@ for cmd in $*; do
        #   For instance:
        #   * <code> gmm_verify ... > $LOG_VERIF </code>
        #   * <code> gmm_verify ... | tee $LOG_VERIF </code>
+       EXEC="gmm_verify -d $w/$FEAT -e lp -D $w/gmm/$FEAT -E gmm lists/gmm.list lists/verif/all.test lists/verif/all.test.candidates"
+       echo $EXEC && $EXEC | tee $LOG_VERIF || exit 1
        echo "Implement the verify option ..."
 
    elif [[ $cmd == verifyerr ]]; then
