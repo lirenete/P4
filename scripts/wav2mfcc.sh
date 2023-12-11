@@ -40,7 +40,7 @@ else
    FRAME="frame"
    WINDOW="window"
    LPC="lpc"
-   MFCC='mfcc'
+   
 fi
 
 # Main command for feature extration
