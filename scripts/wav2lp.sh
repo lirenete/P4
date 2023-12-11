@@ -40,12 +40,14 @@ else
    FRAME="frame"
    WINDOW="window"
    LPC="lpc"
+   MFCC='mfcc'
 fi
 
 # Main command for feature extration
 sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
 	$LPC -l 240 -m $lpc_order > $base.lp || exit 1
    
+
 
 # Our array files need a header with the number of cols and rows:
 ncol=$((lpc_order+1)) # lpc p =>  (gain a1 a2 ... ap) 
