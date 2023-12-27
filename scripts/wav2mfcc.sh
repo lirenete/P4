@@ -40,10 +40,7 @@ else
    FRAME="frame"
    WINDOW="window"
    LPC="lpc"
-<<<<<<< HEAD
-=======
    
->>>>>>> b12faf884ed303665afe445bdc6e7b4f3aa2d676
 fi
 
 # Main command for feature extration
@@ -51,10 +48,6 @@ sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WIND
 	$LPC -l 240 -m $lpc_order > $base.lp || exit 1
    
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b12faf884ed303665afe445bdc6e7b4f3aa2d676
 # Our array files need a header with the number of cols and rows:
 ncol=$((lpc_order+1)) # lpc p =>  (gain a1 a2 ... ap) 
 nrow=`$X2X +fa < $base.lp | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
