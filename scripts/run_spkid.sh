@@ -92,11 +92,19 @@ compute_mfcc() {
     shift
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2mfcc 24 36 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
-
+compute_lpcc() {
+    db=$1
+    shift
+    for filename in $(sort $*); do
+        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
+        EXEC="wav2lpcc 25 25  $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1
+    done
+}
 #  Set the name of the feature (not needed for feature extraction itself)
 if [[ ! -v FEAT && $# > 0 && "$(type -t compute_$1)" = function ]]; then
     FEAT=$1
@@ -124,7 +132,8 @@ for cmd in $*; do
        for dir in $db_devel/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           EXEC="gmm_train -v 1 -T 0.001 -N 5 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train"
+           #se pueden canviar los valores ___________________________________________________________________________________________
+           EXEC="gmm_train -v 1 -T 0.0001 -N 20 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train"
            echo $EXEC && $EXEC || exit 1
            echo
        done
@@ -150,6 +159,7 @@ for cmd in $*; do
        # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
        #
        # - The name of the world model will be used by gmm_verify in the 'verify' command below.
+       #se pueden canviar los numeros___________________________________________________________________________________________
        EXEC="gmm_train -v 1 -T 0.001 -N 5 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train"
        echo $EXEC && $EXEC || exit 1
        
@@ -214,6 +224,7 @@ for cmd in $*; do
         if ($F[2] > -3.214) {print "1\n"}
         else {print "0\n"}' $TEMP_VERIF | tee $FINAL_VERIF
        
+    #se tiene q poner aqui el umbral  (-3.214) 
    
    # If the command is not recognize, check if it is the name
    # of a feature and a compute_$FEAT function exists.
