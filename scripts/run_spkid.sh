@@ -162,8 +162,8 @@ for cmd in $*; do
        #
        # - The name of the world model will be used by gmm_verify in the 'verify' command below.
        #se pueden canviar los numeros___________________________________________________________________________________________
-       #EXEC="gmm_train -v 1 -T 0.001 -N 20 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train"
-       EXEC="gmm_train -i 0 -n 40 -v 1 -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 5 -N 20 -T 0.00001 lists/verif/$world.train"
+       EXEC="gmm_train -v 1 -T 0.00001 -N 20 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train"
+       #EXEC="gmm_train -i 0 -n 40 -v 1 -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 5 -N 20 -T 0.00001 lists/verif/$world.train"
       
        echo $EXEC && $EXEC || exit 1
        
@@ -178,7 +178,7 @@ for cmd in $*; do
        #   * <code> gmm_verify ... > $LOG_VERIF </code>
        #   * <code> gmm_verify ... | tee $LOG_VERIF </code>
 
-       EXEC="gmm_verify -d $w/$FEAT -e lp -D $w/gmm/$FEAT -w $world -E gmm lists/gmm.list lists/verif/all.test lists/verif/all.test.candidates"
+       EXEC="gmm_verify -d $w/$FEAT -e $FEAT -D $w/gmm/$FEAT -w $world -E gmm lists/gmm.list lists/verif/all.test lists/verif/all.test.candidates"
        echo $EXEC && $EXEC | tee $LOG_VERIF || exit 1
        echo "Implement the verify option ..."
 
@@ -224,8 +224,9 @@ for cmd in $*; do
        compute_$FEAT $db_test $lists/final/verif.test
        EXEC="gmm_verify -d $w/$FEAT -e lp -D $w/gmm/$FEAT -w $world -E gmm lists/gmm.list lists/final/verif.test lists/final/verif.test.candidates"
        echo $EXEC && $EXEC | tee $TEMP_VERIF || exit 1
+       #___________________________________________________________________________________________________________________________________________________________-
        perl -ane 'print "$F[0]\t$F[1]\t";
-        if ($F[2] > -3.214) {print "1\n"}
+        if ($F[2] > 0.6) {print "1\n"}
         else {print "0\n"}' $TEMP_VERIF | tee $FINAL_VERIF
        
     #se tiene q poner aqui el umbral  (-3.214) 

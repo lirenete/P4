@@ -48,7 +48,7 @@ ejercicios indicados.
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros de
   salida de SPTK (líneas 45 a 51 del script `wav2lp.sh`).
 
-  Es calcula el nombre de columnes i files de la matriu resultant. Per això, se suma un a l'ordre del predictor per obtenir el nombre de columne, ja que el primer es la ganancia. El nombre de files es calcula tenint en compte la longitud del senyal, la longitud i el desplaçament de la finestra aplicada, amb el comandament perl. S'utilitza l'ordre "sox" per convertir les dades de tipus float a format ASCII i després s'utilitza l'ordre "wc -l" per comptar el nombre de línies i se'n resta 1.
+  Es calcula el nombre de columnes i files de la matriu resultant. Per això, se suma un a l'ordre del predictor per obtenir el nombre de columnes, ja que el primer es la ganancia. El nombre de files es calcula tenint en compte la longitud del senyal, longitud de la finestra i el desplaçament de la finestra aplicada, amb el comandament perl. S'utilitza l'ordre "sox" per convertir les dades de tipus float a format ASCII i després s'utilitza l'ordre "wc -l" per comptar el nombre de línies i se'n resta 1.
 
   * ¿Por qué es más conveniente el formato *fmatrix* que el SPTK?
 
@@ -68,10 +68,32 @@ ejercicios indicados.
 
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para todas las señales de un locutor.
+
+  ![Alt text](<WhatsApp Image 2024-01-02 at 21.03.49.jpeg>)
+  ![Alt text](<WhatsApp Image 2024-01-02 at 20.27.42.jpeg>)
+  ![Alt text](<WhatsApp Image 2024-01-02 at 20.33.54.jpeg>)
   
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
+
+  #COEFICIENTS LP
+  FEAT=lp run_spkid lp train
+  fmatrix_show work/lp/BLOCK01/SES017/*.lp > lp_2_3.txt
+  cut lp_2_3.txt -f4,5
+
+  #COEFICIENTS LPCC
+  FEAT=lpcc run_spkid lpcc train
+  fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc > lpcc_2_3.txt
+  cut lpcc_2_3.txt -f4,5
+
+  #COEFICIENTS MFCC
+  FEAT=mfcc run_spkid mfcc train
+  fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc > mfcc_2_3.txt
+  cut mfcc_2_3.txt -f4,5
+
   + ¿Cuál de ellas le parece que contiene más información?
+
+  El que conté més informació és el LPCC i MFCC ja que són més incorrelats. Els coeficients LP es veuen molt més correlats.
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3 para un locutor, y rellene la tabla siguiente con los valores obtenidos.
@@ -91,6 +113,10 @@ ejercicios indicados.
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
+  LPCC: Seguint la teoria, el paràmetre adequat és l'ordre del coeficients de la predicció lineal del LPCC. 8-14 coeficients.
+
+  MFCC: El paràmetre pel càlcul de coeficients MFCC es l'ordre dels coeficients cepstrals en escala Mel. 13 coefs i 24-40 filtres.
+
 ### Entrenamiento y visualización de los GMM.
 
 Complete el código necesario para entrenar modelos GMM.
@@ -98,9 +124,17 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
 
+![Alt text](image-4.png)
+
+mateix locutor 
+![Alt text](image-5.png)
+
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+
+Amb diferent locutor
+![Alt text](image-6.png)
 
 ### Reconocimiento del locutor.
 
@@ -108,6 +142,10 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+
+  ![Alt text](image-7.png)
+
+  ![Alt text](image-3.png)
 
 ### Verificación del locutor.
 
@@ -117,7 +155,24 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
- 
+
+   |                        | LP         | LPCC        | MFCC |
+  |------------------------|:----------:|:---------:|:---------:|
+  | numero de errores |320  |  20 |   44  |
+    |------------------------|:----------:|:---------:|:---------:|
+    | numero total |785   |  785 |   785 |
+    |------------------------|:----------:|:---------:|:---------:|
+     | error rate |40.76%  |  2.55% |   5.61%  |
+
+ run_spkid lp train test classerr trainworld verify verifyerr
+ ![Alt text](image-8.png)
+run_spkid lpcc train test classerr trainworld verify verifyerr
+![Alt text](image-9.png)
+run_spkid mfcc train test classerr trainworld verify verifyerr
+![Alt text](image-10.png)
+
+Hem posat al umbral 0.62 perquè era el millor valor que hem trobat.
+
 ### Test final
 
 - Adjunte, en el repositorio de la práctica, los ficheros `class_test.log` y `verif_test.log` 
