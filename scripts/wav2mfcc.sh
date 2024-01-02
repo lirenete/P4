@@ -18,15 +18,16 @@ cleanup() {
    \rm -f $base.*
 }
 
-if [[ $# != 4 ]]; then
-   echo "$0 mfcc_order mel_filter_bank_order input.wav output.mfcc"
+if [[ $# != 5 ]]; then
+   echo "$0 fm mfcc_order mel_filter_bank_order input.wav output.mfcc"
    exit 1
 fi
 
-mfcc_order=$1
-mel_filter_bank_order=$2
-inputfile=$3
-outputfile=$4
+fm=$1
+mfcc_order=$2
+mel_filter_bank_order=$3
+inputfile=$4
+outputfile=$5
 
 UBUNTU_SPTK=1
 if [[ $UBUNTU_SPTK == 1 ]]; then
@@ -47,7 +48,7 @@ fi
 # Main command for feature extration
 sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
 	#$MFCC -l 240 -m $lpc_order > $base.lp || exit 1
-   $MFCC -l 240 -s 8 -w 0 -m $mfcc_order -n $mel_filter_bank_order > $base.mfcc || exit 1
+   $MFCC -s $fm -l 180 -m $mfcc_order -n $mel_filter_bank_order > $base.mfcc || exit 1
    
 
 # Our array files need a header with the number of cols and rows:

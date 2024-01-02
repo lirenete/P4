@@ -87,21 +87,21 @@ compute_lp() {
         echo $EXEC && $EXEC || exit 1
     done
 }
-compute_mfcc() {
-    db=$1
-    shift
-    for filename in $(sort $*); do
-        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 24 36 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
-        echo $EXEC && $EXEC || exit 1
-    done
-}
 compute_lpcc() {
     db=$1
     shift
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
         EXEC="wav2lpcc 25 25  $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1
+    done
+}
+compute_mfcc() {
+    db=$1
+    shift
+    for filename in $(sort $*); do
+        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
+        EXEC="wav2mfcc 8 20 33 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -160,7 +160,9 @@ for cmd in $*; do
        #
        # - The name of the world model will be used by gmm_verify in the 'verify' command below.
        #se pueden canviar los numeros___________________________________________________________________________________________
-       EXEC="gmm_train -v 1 -T 0.001 -N 5 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train"
+       #EXEC="gmm_train -v 1 -T 0.001 -N 20 -m 5 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train"
+       EXEC="gmm_train -i 0 -n 40 -v 1 -d $w/$FEAT/ -e $FEAT -g $w/gmm/$FEAT/$world.gmm -m 5 -N 20 -T 0.00001 lists/verif/$world.train"
+      
        echo $EXEC && $EXEC || exit 1
        
 

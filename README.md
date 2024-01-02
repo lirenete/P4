@@ -33,16 +33,36 @@ ejercicios indicados.
   principal (`sox`, `$X2X`, `$FRAME`, `$WINDOW` y `$LPC`). Explique el significado de cada una de las 
   opciones empleadas y de sus valores.
 
+  ![Alt text](image.png)
+
+  sox: Convertim els arxius d'audio a format señal de tipus "signed int" de 16 bits.
+
+  x2x: Canviem el format de les dades de Es decir de s (short - 2 bytes) a f (float - 4 bytes). 
+
+  frame: Per dividir la senyal en trames de 240 mostres, amb un desplaçament de finestra de 80 mostres.
+
+  window: Apliquem un enfinestrat a cada tram, amb la finestra per defecte Blackman.
+
+  LPC: Es fa servir per calcular els coeficients LPC de cada trama finestrada. S'especifica l'ordre de predicció amb el paràmetre "-m" i s'utilitza una mida de trama ("-l") de 240 mostres.
+
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros de
   salida de SPTK (líneas 45 a 51 del script `wav2lp.sh`).
 
+  Es calcula el nombre de columnes i files de la matriu resultant. Per això, se suma un a l'ordre del predictor per obtenir el nombre de columne, ja que el primer es la ganancia. El nombre de files es calcula tenint en compte la longitud del senyal, la longitud i el desplaçament de la finestra aplicada, amb el comandament perl. S'utilitza l'ordre "sox" per convertir les dades de tipus float a format ASCII i després s'utilitza l'ordre "wc -l" per comptar el nombre de línies i se'n resta 1.
+
   * ¿Por qué es más conveniente el formato *fmatrix* que el SPTK?
+
+  El format fmatrix es més convenient que el SPTK perqué és més fàcil de llegir i utilitzar.
 
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales de predicción lineal
   (LPCC) en su fichero <code>scripts/wav2lpcc.sh</code>:
 
+  ![Alt text](image-1.png)
+
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC) en su
   fichero <code>scripts/wav2mfcc.sh</code>:
+
+ ![Alt text](image-2.png)
 
 ### Extracción de características.
 
