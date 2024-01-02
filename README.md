@@ -174,9 +174,11 @@ Complete el código necesario para realizar verificación del locutor y optimice
  run_spkid lp train test classerr trainworld verify verifyerr
 
  ![Alt text](image-8.png)
+ 
 run_spkid lpcc train test classerr trainworld verify verifyerr
 
 ![Alt text](image-9.png)
+
 run_spkid mfcc train test classerr trainworld verify verifyerr
 
 ![Alt text](image-10.png)
