@@ -48,7 +48,7 @@ ejercicios indicados.
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros de
   salida de SPTK (líneas 45 a 51 del script `wav2lp.sh`).
 
-  Es calcula el nombre de columnes i files de la matriu resultant. Per això, se suma un a l'ordre del predictor per obtenir el nombre de columne, ja que el primer es la ganancia. El nombre de files es calcula tenint en compte la longitud del senyal, la longitud i el desplaçament de la finestra aplicada, amb el comandament perl. S'utilitza l'ordre "sox" per convertir les dades de tipus float a format ASCII i després s'utilitza l'ordre "wc -l" per comptar el nombre de línies i se'n resta 1.
+  Es calcula el nombre de columnes i files de la matriu resultant. Per això, se suma un a l'ordre del predictor per obtenir el nombre de columnes, ja que el primer es la ganancia. El nombre de files es calcula tenint en compte la longitud del senyal, longitud de la finestra i el desplaçament de la finestra aplicada, amb el comandament perl. S'utilitza l'ordre "sox" per convertir les dades de tipus float a format ASCII i després s'utilitza l'ordre "wc -l" per comptar el nombre de línies i se'n resta 1.
 
   * ¿Por qué es más conveniente el formato *fmatrix* que el SPTK?
 
