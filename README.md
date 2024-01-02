@@ -76,22 +76,23 @@ ejercicios indicados.
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
 
-  #COEFICIENTS LP \n\n
+  #COEFICIENTS LP
 
-  FEAT=lp run_spkid lp train \n
-  fmatrix_show work/lp/BLOCK01/SES017/*.lp > lp_2_3.txt \n
-  cut lp_2_3.txt -f4,5 \n
+  FEAT=lp run_spkid lp train 
+  fmatrix_show work/lp/BLOCK01/SES017/*.lp > lp_2_3.txt
+  cut lp_2_3.txt -f4,5
 
-  #COEFICIENTS LPCC \n\n
-  FEAT=lpcc run_spkid lpcc train \n
-  fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc > lpcc_2_3.txt \n
-  cut lpcc_2_3.txt -f4,5 \n
+  #COEFICIENTS LPCC
 
-  #COEFICIENTS MFCC \n\n
+  FEAT=lpcc run_spkid lpcc train
+  fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc > lpcc_2_3.txt
+  cut lpcc_2_3.txt -f4,5
 
-  FEAT=mfcc run_spkid mfcc train \n
-  fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc > mfcc_2_3.txt \n
-  cut mfcc_2_3.txt -f4,5 \n
+  #COEFICIENTS MFCC
+
+  FEAT=mfcc run_spkid mfcc train
+  fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc > mfcc_2_3.txt
+  cut mfcc_2_3.txt -f4,5
 
   + ¿Cuál de ellas le parece que contiene más información?
 
@@ -128,7 +129,10 @@ Complete el código necesario para entrenar modelos GMM.
 
 ![Alt text](image-4.png)
 
+
+
 mateix locutor 
+
 ![Alt text](image-5.png)
 
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
@@ -136,6 +140,7 @@ mateix locutor
   del modelado GMM para diferenciar las señales de uno y otro.
 
 Amb diferent locutor
+ 
 ![Alt text](image-6.png)
 
 ### Reconocimiento del locutor.
@@ -167,10 +172,13 @@ Complete el código necesario para realizar verificación del locutor y optimice
      | error rate |40.76%  |  2.55% |   5.61%  |
 
  run_spkid lp train test classerr trainworld verify verifyerr
+
  ![Alt text](image-8.png)
 run_spkid lpcc train test classerr trainworld verify verifyerr
+
 ![Alt text](image-9.png)
 run_spkid mfcc train test classerr trainworld verify verifyerr
+
 ![Alt text](image-10.png)
 
 Hem posat al umbral 0.62 perquè era el millor valor que hem trobat.
