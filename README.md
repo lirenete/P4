@@ -76,20 +76,22 @@ ejercicios indicados.
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
 
-  #COEFICIENTS LP
-  FEAT=lp run_spkid lp train
-  fmatrix_show work/lp/BLOCK01/SES017/*.lp > lp_2_3.txt
-  cut lp_2_3.txt -f4,5
+  #COEFICIENTS LP \n\n
 
-  #COEFICIENTS LPCC
-  FEAT=lpcc run_spkid lpcc train
-  fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc > lpcc_2_3.txt
-  cut lpcc_2_3.txt -f4,5
+  FEAT=lp run_spkid lp train \n
+  fmatrix_show work/lp/BLOCK01/SES017/*.lp > lp_2_3.txt \n
+  cut lp_2_3.txt -f4,5 \n
 
-  #COEFICIENTS MFCC
-  FEAT=mfcc run_spkid mfcc train
-  fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc > mfcc_2_3.txt
-  cut mfcc_2_3.txt -f4,5
+  #COEFICIENTS LPCC \n\n
+  FEAT=lpcc run_spkid lpcc train \n
+  fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc > lpcc_2_3.txt \n
+  cut lpcc_2_3.txt -f4,5 \n
+
+  #COEFICIENTS MFCC \n\n
+
+  FEAT=mfcc run_spkid mfcc train \n
+  fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc > mfcc_2_3.txt \n
+  cut mfcc_2_3.txt -f4,5 \n
 
   + ¿Cuál de ellas le parece que contiene más información?
 
