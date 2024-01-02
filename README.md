@@ -91,6 +91,10 @@ ejercicios indicados.
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
+  LPCC: Seguint la teoria, el paràmetre adequat és l'ordre del coeficients de la predicció lineal del LPCC. 
+
+  MFCC: El paràmetre per el calcul de coeficients MFCC es l'ordre dels coeficients cepstrals en escala Mel.
+
 ### Entrenamiento y visualización de los GMM.
 
 Complete el código necesario para entrenar modelos GMM.
@@ -98,9 +102,16 @@ Complete el código necesario para entrenar modelos GMM.
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
 
+![Alt text](image-4.png)
+
+mateix locutor 
+![Alt text](image-5.png)
+
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+
+![Alt text](image-6.png)
 
 ### Reconocimiento del locutor.
 
@@ -108,6 +119,9 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+  ![Alt text](image-7.png)
+
+  ![Alt text](image-3.png)
 
 ### Verificación del locutor.
 
@@ -117,7 +131,22 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
+
+   |                        | LP         | LPCC        | MFCC |
+  |------------------------|:----------:|:---------:|:---------:|
+  | numero de errores |320  |  20 |   44  |
+    |------------------------|:----------:|:---------:|:---------:|
+    | numero total |785   |  785 |   785 |
+    |------------------------|:----------:|:---------:|:---------:|
+     | error rate |40.76%  |  2.55% |   5.61%  |
+
  
+ ![Alt text](image-8.png)
+
+![Alt text](image-9.png)
+
+![Alt text](image-10.png)
+
 ### Test final
 
 - Adjunte, en el repositorio de la práctica, los ficheros `class_test.log` y `verif_test.log` 
