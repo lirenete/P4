@@ -73,6 +73,8 @@ ejercicios indicados.
     parametrizadas.
   + ¿Cuál de ellas le parece que contiene más información?
 
+  El que conté més informació és el LPCC i MFCC ja que són més incorrelats. Els coeficients LP es veuen molt més correlats.
+
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3 para un locutor, y rellene la tabla siguiente con los valores obtenidos.
 
@@ -91,9 +93,9 @@ ejercicios indicados.
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
-  LPCC: Seguint la teoria, el paràmetre adequat és l'ordre del coeficients de la predicció lineal del LPCC. 
+  LPCC: Seguint la teoria, el paràmetre adequat és l'ordre del coeficients de la predicció lineal del LPCC. 8-14 coeficients.
 
-  MFCC: El paràmetre per el calcul de coeficients MFCC es l'ordre dels coeficients cepstrals en escala Mel.
+  MFCC: El paràmetre pel càlcul de coeficients MFCC es l'ordre dels coeficients cepstrals en escala Mel. 13 coefs i 24-40 filtres.
 
 ### Entrenamiento y visualización de los GMM.
 
@@ -111,6 +113,7 @@ mateix locutor
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
 
+Amb diferent locutor
 ![Alt text](image-6.png)
 
 ### Reconocimiento del locutor.
@@ -119,6 +122,7 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
 
 - Inserte una tabla con la tasa de error obtenida en el reconocimiento de los locutores de la base de datos
   SPEECON usando su mejor sistema de reconocimiento para los parámetros LP, LPCC y MFCC.
+
   ![Alt text](image-7.png)
 
   ![Alt text](image-3.png)
@@ -140,12 +144,14 @@ Complete el código necesario para realizar verificación del locutor y optimice
     |------------------------|:----------:|:---------:|:---------:|
      | error rate |40.76%  |  2.55% |   5.61%  |
 
- 
+ run_spkid lp train test classerr trainworld verify verifyerr
  ![Alt text](image-8.png)
-
+run_spkid lpcc train test classerr trainworld verify verifyerr
 ![Alt text](image-9.png)
-
+run_spkid mfcc train test classerr trainworld verify verifyerr
 ![Alt text](image-10.png)
+
+Hem posat al umbral 0.62 perquè era el millor valor que hem trobat.
 
 ### Test final
 
